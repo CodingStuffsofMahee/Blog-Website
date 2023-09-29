@@ -1,21 +1,29 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Link } from 'react-router-dom'
-
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import ProfileDropDown from '../DropDowns/ProfileDropDown'
+import LoggedContext from '../Context/LoginContext'
 const navigation = [
     { name: 'All Blogs', href: '/all-blogs' },
     { name: 'Newsletter', href: '/newsletter' }
 ]
+const isLogged = localStorage.getItem('logged')
 
+console.log("local", isLogged);
+function Navbar(props) {
+    const { LoginTrue, setLoginTrue } = useContext(LoggedContext)
+    if (isLogged) {
+        setLoginTrue(true)
+    }
+    console.log(LoginTrue);
 
-function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
     return (
         <>
             <header className="absolute inset-x-0 top-0 z-99 bg-white">
                 <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+
                     <div className="flex lg:flex-1">
                         <Link to="/" className="-m-1.5 p-1.5">
                             <span className="sr-only">Your Company</span>
@@ -44,10 +52,16 @@ function Navbar() {
                         ))}
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <Link to="/logIn" className="text-lg font-semibold leading-6 text-gray-900">
-                            Log in <span aria-hidden="true">&rarr;</span>
-                        </Link>
+                        {LoginTrue ? <ProfileDropDown />
+                            :
+                            props.showSignUp ? <Link to="/signUp" className="text-lg font-semibold leading-6 text-gray-900">
+                                SignUp <span aria-hidden="true">&rarr;</span>
+                            </Link> : <Link to="/logIn" className="text-lg font-semibold leading-6 text-gray-900">
+                                Log in <span aria-hidden="true">&rarr;</span>
+                            </Link>
+                        }
                     </div>
+
                 </nav>
                 <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
                     <div className="fixed inset-0 z-50" />
@@ -83,14 +97,25 @@ function Navbar() {
                                         </Link>
                                     ))}
                                 </div>
-                                <div className="py-6">
-                                    <Link
-                                        to="/logIn"
-                                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                    >
-                                        Log in
-                                    </Link>
+                                <div className="py-6 flex justify-center">
+                                    {LoginTrue ? <ProfileDropDown />
+                                        :
+
+                                        props.showSignUp ? <Link
+                                            to="/signUp"
+                                            className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                        >
+                                            Sign up
+                                        </Link> :
+                                            <Link
+                                                to="/logIn"
+                                                className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                            >
+                                                Log in
+                                            </Link>
+                                    }
                                 </div>
+
                             </div>
                         </div>
                     </Dialog.Panel>

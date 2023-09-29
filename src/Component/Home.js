@@ -34,7 +34,7 @@ function Home() {
                 </div>
             </div>
             <TopPickBlogs />
-            <Newsletter noNavbar={'true'}/>
+            <Newsletter noNavbar={'true'} />
         </>
     )
 }
