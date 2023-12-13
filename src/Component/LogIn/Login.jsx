@@ -4,6 +4,7 @@ import Navbar from '../Navbar/Navbar'
 import axios from 'axios';
 import Toast from '../Toast/Toast';
 import LoggedContext from '../Context/LoginContext';
+import LoaderButton from '../Loaders/LoaderButton';
 function Login() {
     const { setLoginTrue } = useContext(LoggedContext)
     const [serverResponse, setServerResponse] = useState({
@@ -14,11 +15,12 @@ function Login() {
         email: '',
         password: ''
     })
-    console.log(LoginFormData);
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setServerResponse({ ...serverResponse, isLogging: true })
+
         try {
-            const response = await axios.post('https://mongo-dbloginblog-production.up.railway.app/auth/login', LoginFormData, {
+            const response = await axios.post('https://interesting-faithful-title.glitch.me/api/account/login', LoginFormData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -26,13 +28,15 @@ function Login() {
 
             if (response.status === 200) {
 
-                console.log(response.data);
-                setServerResponse({ ...LoginFormData, serverData: response.data })
-                console.log("Server", serverResponse.serverData);
-                if (response.data.statusCode === 200) {
+                setServerResponse({ ...serverResponse, serverData: response.data })
+                if (response.data.status === 200) {
                     setLoginFormData({ email: '', password: '' })
                     localStorage.setItem('logged', 'true')
                     setLoginTrue(true)
+                    if (response.data.role==='admin') {
+                        localStorage.setItem('adminLogged','true')
+                    }
+                    setServerResponse({ ...serverResponse, isLogging: false })
                 }
             } else {
                 console.error('Received an unexpected response:', response);
@@ -44,8 +48,8 @@ function Login() {
     return (
         <>
             <Navbar showSignUp={true} />
-            <div className="flex min-h-full flex-1  flex-col justify-center items-center mt-14 px-6 py-12 lg:px-8">
-                <div className='border-2 rounded-2xl border-indigo-400 shadow-2xl shadow-gray p-10'>
+            <div className="flex min-h-full flex-1  flex-col justify-center items-center mt-6 px-6 lg:px-8">
+                <div className='border-2 rounded-2xl border-yellow-700 sm:border-[#AA85C6] shadow-2xl shadow-gray p-10'>
 
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm px-14 ">
                         <img
@@ -88,7 +92,7 @@ function Login() {
                                         Password
                                     </label>
                                     <div className="text-sm">
-                                        <Link to="#" className="font-semibold  text-indigo-600 hover:text-indigo-500">
+                                        <Link to="#" className="font-semibold text-[#AA85C6] hover:text-[#c298e2]">
                                             Forgot password?
                                         </Link>
                                     </div>
@@ -109,27 +113,27 @@ function Login() {
                             </div>
 
                             <div>
-                                <button
-                                    type="submit"
-                                    className="flex w-full  justify-center rounded-md bg-indigo-600 px-3 py-2 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                {serverResponse.isLogging ? <LoaderButton /> :
+                                    <button
+                                        type="submit"
+                                        className="rounded-md  w-full py-3 text-lg font-semibold text-white shadow-sm bg-[#D05270] hover:bg-[#eb5d7e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb5d7e]"
 
-                                >
-                                    Sign in
-                                </button>
+                                    >
+                                        Sign in
+                                    </button>}
                             </div>
                         </form>
 
-                        <p className="mt-10 text-center text-sm text-gray-500">
+                        <p className="mt-10 text-center font-medium text-sm text-gray-700">
                             Don't have a Account?{' '}
-                            <Link to="/signUp" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                            <Link to="/signUp" className="font-semibold leading-6 text-[#AA85C6] hover:text-[#c298e2]">
                                 Create a account now
                             </Link>
                         </p>
                     </div>
                 </div>
             </div>
-            {console.log(serverResponse.serverData)}
-            {serverResponse.serverData.statusCode ? <Toast msg={serverResponse.serverData.message} type={serverResponse.serverData.statusCode === 200 ? true : false} /> : null}
+            {serverResponse.serverData.status ? <Toast msg={serverResponse.serverData.message} type={serverResponse.serverData.status === 200 ? true : false} /> : null}
 
         </>
     )

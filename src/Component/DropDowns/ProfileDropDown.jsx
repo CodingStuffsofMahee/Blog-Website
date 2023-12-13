@@ -1,6 +1,6 @@
 import { Fragment, useContext } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { Link } from 'react-router-dom'
+import { Link,  useNavigate } from 'react-router-dom'
 import LoggedContext from '../Context/LoginContext'
 
 
@@ -12,10 +12,13 @@ function classNames(...classes) {
 
 export default function ProfileDropDown() {
     const { setLoginTrue } = useContext(LoggedContext)
+    const navigate = useNavigate();
 
     const handleSignout = () => {
         localStorage.removeItem('logged')
+        localStorage.removeItem('adminLogged')
         setLoginTrue(false)
+        navigate('/');
     }
 
     // console.log(LoginTrue);
