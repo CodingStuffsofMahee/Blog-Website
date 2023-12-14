@@ -12,12 +12,12 @@ function Home() {
             <Navbar />
             <div className="mx-auto lg:max-w-7xl md:max-w-2xl max-w-sm lg:mt-12 max-md:mt-8 max-lg:mt-8 flex lg:gap-x-36 md:gap-x-16 items-center justify-center ">
                 <div className="w-[64rem]">
-                    <h1 className="text-3xl text-center md:text-4xl font-bold  text-[#1a1a1a] tracking-tight p-3 rounded-2xl lg:text-6xl">
+                    <h1 className="text-4xl text-center md:text-5xl font-bold  text-[#1a1a1a] tracking-tight p-3 rounded-2xl lg:text-6xl">
                         Welcome to, <span className='text-[#D05270] text-'>
                             The Coding Scribe
                         </span>
                     </h1>
-                    <div className="mt-6 lg:text-xl md:text-lg text-sm leading-8 text-gray-700">
+                    <div className="mt-6 lg:text-xl md:text-lg text-lg leading-8 text-gray-700">
                         Welcome to The Coding Scribe, your go-to destination for everything related to technology, coding, and beyond. Whether you're a seasoned developer, a tech enthusiast, or just someone curious about the world of technology, our blog has something for everyone.
                         
 
