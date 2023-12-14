@@ -15,7 +15,7 @@ export default function Createblog() {
     isLogging: false,
     serverData: {}
   });
-
+  const BlogData=new FormData()
 
 
 
@@ -36,14 +36,10 @@ export default function Createblog() {
         blogCreationDate: new Date().toLocaleDateString()
       }
       // Post here
-
+      BlogData.append('file',postData)
       try {
         // console.log(postData)
-        const response = await axios.post('https://interesting-faithful-title.glitch.me/api/create', postData, {
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        })
+        const response = await axios.post('https://interesting-faithful-title.glitch.me/api/create', BlogData)
 
         if (response.status === 200) {
           setServerResponse(prevServerResponse => ({ ...prevServerResponse, serverData: response.data }));
