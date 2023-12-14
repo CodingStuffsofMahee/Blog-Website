@@ -39,9 +39,9 @@ function Navbar(props) {
                     <div className=" text-white lg:flex lg:flex-1 lg:justify-end">
                         {LoginTrue ? <ProfileDropDown />
                             :
-                            props.showSignUp ? <Link to="/signUp" className="text-lg text-white font-semibold leading-6  ">
+                            props.showSignUp ? <Link to="/signUp" className="text-lg text-white font-semibold leading-6 animate-bounce ">
                                 SignUp <span aria-hidden="true">&rarr;</span>
-                            </Link> : <Link to="/logIn" className="text-lg font-semibold leading-6 text-white">
+                            </Link> : <Link to="/logIn" className="text-lg font-semibold leading-6 text-white animate-bounce">
                                 Log in <span aria-hidden="true">&rarr;</span>
                             </Link>
                         }
