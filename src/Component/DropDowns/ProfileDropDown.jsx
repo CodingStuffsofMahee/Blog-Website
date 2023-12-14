@@ -1,6 +1,6 @@
 import { Fragment, useContext } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { Link,  useNavigate } from 'react-router-dom'
+import {   useNavigate } from 'react-router-dom'
 import LoggedContext from '../Context/LoginContext'
 
 
@@ -43,7 +43,7 @@ export default function ProfileDropDown() {
             >
                 <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-md:-right-20 max-md:text-center">
                     <div className="py-1">
-                        <Menu.Item>
+                        {/* <Menu.Item>
                             {({ active }) => (
                                 <Link
                                     to="#"
@@ -55,7 +55,7 @@ export default function ProfileDropDown() {
                                     Account settings
                                 </Link>
                             )}
-                        </Menu.Item>
+                        </Menu.Item> */}
                         <Menu.Item>
                             {({ active }) => (
                                 <button onClick={handleSignout}
