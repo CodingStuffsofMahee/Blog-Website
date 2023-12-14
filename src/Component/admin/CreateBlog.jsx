@@ -15,11 +15,8 @@ export default function Createblog() {
     isLogging: false,
     serverData: {}
   });
-  const BlogData=new FormData()
 
-
-
-
+  const BlogData = new FormData()
 
 
   const handleCreateBlog = async () => {
@@ -27,36 +24,38 @@ export default function Createblog() {
       alert("Please Fill all the details")
     } else {
       setServerResponse(prevServerResponse => ({ ...prevServerResponse, isLogging: true }));
-
-      const postData = {
-        blogName: blogTitle,
-        blogImage: picture,
-        blogContent: content,
-        blogCategory: category,
-        blogCreationDate: new Date().toLocaleDateString()
-      }
       // Post here
-      BlogData.append('',postData)
-      try {
-        // console.log(postData)
-        const response = await axios.post('https://interesting-faithful-title.glitch.me/api/create', postData)
-
-        if (response.status === 200) {
-          setServerResponse(prevServerResponse => ({ ...prevServerResponse, serverData: response.data }));
-          if (response.data.status === 200) {
-            setBlogTitle('')
-            setCategory("")
-            setContent('')
-            setPicture('')
-            setServerResponse(prevServerResponse => ({ ...prevServerResponse, isLogging: false }));
-          }
-        } else {
-          console.error('Received an unexpected response:', response);
-        }
-      }
-      catch (err) { console.error(err) }
+      BlogData.append('blogName', blogTitle)
+      BlogData.append('blogContent', content)
+      BlogData.append('blogCategory', category)
+      BlogData.append('blogCreationDate', new Date().toLocaleDateString())
+      BlogData.append('blogImage', picture)
     }
+
+    try {
+      // console.log(postData)
+      const response = await axios.post('https://interesting-faithful-title.glitch.me/api/create', BlogData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      })
+
+      if (response.status === 200) {
+        setServerResponse(prevServerResponse => ({ ...prevServerResponse, serverData: response.data }));
+        if (response.data.status === 200) {
+          setBlogTitle('')
+          setCategory("")
+          setContent('')
+          setPicture('')
+          setServerResponse(prevServerResponse => ({ ...prevServerResponse, isLogging: false }));
+        }
+      } else {
+        console.error('Received an unexpected response:', response);
+      }
+    }
+    catch (err) { console.error(err) }
   }
+
   async function uploadProfilePic(picture) {
     const data = new FormData();
     data.append("file", picture)
