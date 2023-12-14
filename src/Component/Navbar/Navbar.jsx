@@ -16,12 +16,12 @@ function Navbar(props) {
             <header className="inset-x-0 w-full top-0 p-4  sm:p-6 ">
                 <nav className="flex bg-yellow-600 sm:bg-[#AA85C6]  rounded-xl items-center justify-between p-3 lg:px-8" aria-label="Global">
 
-                    <div className="flex lg:flex-1">
+                    <div className="flex lg:flex-1 ">
                         <Link to="/" className="-m-1.5 p-1.5">
                             <span className="sr-only">Your Company</span>
                             <img
-                                className="h-12 w-auto"
-                                src={require('../assests/profilePic.webp')}
+                                className="h-14 w-14"
+                                src={require('../assests/navbar.png')}
                                 alt=""
                             />
                         </Link>
@@ -36,7 +36,7 @@ function Navbar(props) {
                     <div className=" text-white lg:flex lg:flex-1 lg:justify-end">
                         {LoginTrue ? <ProfileDropDown />
                             :
-                            props.showSignUp ? <Link to="/signUp" className="text-lg text-white font-semibold leading-6 ">
+                            props.showSignUp ? <Link to="/signUp" className="text-lg text-white font-semibold leading-6  ">
                                 SignUp <span aria-hidden="true">&rarr;</span>
                             </Link> : <Link to="/logIn" className="text-lg font-semibold leading-6 text-white">
                                 Log in <span aria-hidden="true">&rarr;</span>
