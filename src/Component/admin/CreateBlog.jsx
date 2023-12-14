@@ -36,10 +36,10 @@ export default function Createblog() {
         blogCreationDate: new Date().toLocaleDateString()
       }
       // Post here
-      BlogData.append('file',postData)
+      BlogData.append('',postData)
       try {
         // console.log(postData)
-        const response = await axios.post('https://interesting-faithful-title.glitch.me/api/create', BlogData)
+        const response = await axios.post('https://interesting-faithful-title.glitch.me/api/create', postData)
 
         if (response.status === 200) {
           setServerResponse(prevServerResponse => ({ ...prevServerResponse, serverData: response.data }));
