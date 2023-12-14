@@ -19,11 +19,14 @@ function Navbar(props) {
                     <div className="flex lg:flex-1 ">
                         <Link to="/" className="-m-1.5 p-1.5">
                             <span className="sr-only">Your Company</span>
-                            <img
-                                className="h-14 w-14"
-                                src={require('../assests/navbar.png')}
-                                alt=""
-                            />
+                            <div className='bg-white w-full rounded-lg px-2'>
+
+                                <img
+                                    className="h-14 w-14"
+                                    src={require('../assests/profilePic.webp')}
+                                    alt=""
+                                />
+                            </div>
                         </Link>
                     </div>
                     <div className="hidden lg:flex lg:gap-x-12">
@@ -45,7 +48,7 @@ function Navbar(props) {
                     </div>
 
                 </nav>
-              
+
             </header>
         </>
 
