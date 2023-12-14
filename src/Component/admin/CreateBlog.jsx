@@ -131,7 +131,6 @@ export default function Createblog() {
             <option value='Coding' >Coding</option>
             <option value='Lifestyle' >Lifestyle</option>
             <option value='Tech' >Tech</option>
-            <option value='Coding' >Coding</option>
 
           </select>
           <div className='mb-2 blogPart w-full md:text-2xl text-l'>

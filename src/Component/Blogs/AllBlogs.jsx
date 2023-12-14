@@ -41,6 +41,7 @@ function AllBlogs() {
                     <button className={`font-medium ${category === 'Tech' ? 'underline text-[#D05270]' : ''} `} onClick={() => { setCategory('Tech') }}>Tech Blogs</button>
                     <button className={`font-medium ${category === 'Web Development' ? 'underline text-[#D05270]' : ''} `} onClick={() => { setCategory('Web Development') }}>Web Development</button>
                     <button className={`font-medium ${category === 'Coding' ? 'underline text-[#D05270]' : ''} `} onClick={() => { setCategory('Coding') }}>Coding Problems</button>
+                    <button className={`font-medium ${category === 'Lifestyle' ? 'underline text-[#D05270]' : ''} `} onClick={() => { setCategory('Lifestyle') }}>Lifestyle</button>
                 </div>
                 <article>
                     {console.log(blogs.length)}
