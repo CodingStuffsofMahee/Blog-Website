@@ -36,8 +36,8 @@ function Blog() {
                             </p>
                         </div>
 
-                        <div className="dark:text-gray-700 pb-6" >
-                            <p dangerouslySetInnerHTML={{ __html: sanitizedHtml }}></p>
+                        <div className="dark:text-gray-700 pb-6 flex break-words justify-center" >
+                            <p className='w-[20rem] px-3 sm:w-[40rem] break-words ' dangerouslySetInnerHTML={{ __html: sanitizedHtml }}></p>
                         </div>
                         <div className="pt-4 sm:pt-12 border-t dark:border-gray-700">
                             <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
